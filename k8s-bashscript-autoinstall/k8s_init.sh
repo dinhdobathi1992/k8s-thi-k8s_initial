@@ -1,6 +1,7 @@
 #!/bin/bash -x
 #Varible System
 docker_daemon=/etc/docker/daemon.json
+network=192.168.230 #This is host network of vmware workstation (or virtualbox). Please change it to match your virtualization environment
 
 #Iptables Setting
 modprobe br_netfilter
@@ -13,9 +14,8 @@ sysctl --system
 #Turn off SWAP to increse performance
 swapoff -a
 
-#set hostname /etc/hosts. Only use for vmware workstation or virtualbox 
-#length=9 mean number of workers
-network=192.168.230 #This is Vmware workstation or Virtualbox host-network
+#set hostname /etc/hosts
+#length=9 mean number of node workers
 echo $network.10 kube-master > /etc/hosts
 for i in {1..9}
 do 
@@ -55,9 +55,15 @@ yum makecache
 
 #Installing K8S Cluster
 if [ "$HOSTNAME" = kube-master ]; then
-  cd /vagrant
-  sh k8s_master.sh
+      if [ ! -d /vagrant ]; then
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_master.sh?inline=false -O /vagrant/k8s_master.sh
+      sh k8s_master.sh
+      if
 else
-  cd /vagrant
-  sh k8s_node.sh
+      if [ ! -d /vagrant ]; then
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
+      sh k8s_node.sh
+      if
 fi
