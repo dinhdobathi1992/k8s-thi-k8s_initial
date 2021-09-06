@@ -1,3 +1,7 @@
+variable "service_account_key" {
+  type = string
+  default = "linh-324413-371ec54a7bed.json"
+}
 variable "gce_region" {
   type    = string
   default = "asia-southeast1"
