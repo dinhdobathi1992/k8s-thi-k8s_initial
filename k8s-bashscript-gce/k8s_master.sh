@@ -15,7 +15,7 @@ echo "Installing K8S packages"
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl start kubelet
 systemctl enable kubelet
-#Config k8s with assign ip address to k8s api server
+#Config k8s with assign an ip address to k8s api server
 kubeadm init --apiserver-advertise-address $get_private_ip --pod-network-cidr 172.16.0.0/16 --apiserver-cert-extra-sans=$get_private_ip,$get_public_ip
 sleep 5
 
