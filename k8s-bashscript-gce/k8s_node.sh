@@ -12,6 +12,7 @@ sshpass -p "vagrant" scp -o StrictHostKeyChecking=no vagrant@kube-master:/home/v
 chmod +x kubeadm_join_cmd.sh
 if [[ $(sh ./kubeadm_join_cmd.sh | grep 'This node has joined the cluster') = "This node has joined the cluste" ]]; then
 echo "This node has joined the cluste"
+sleep 10
 shutdown -r now
 fi
 
