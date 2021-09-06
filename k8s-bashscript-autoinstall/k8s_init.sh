@@ -15,12 +15,12 @@ swapoff -a
 
 #set hostname /etc/hosts. Only use for vmware workstation or virtualbox 
 #length=9 mean number of workers
-##network=192.168.230
-#echo $network.10 kube-master > /etc/hosts
-#for i in {1..9}
-#do 
-#  echo $network.1$i kube-worker-$i >> /etc/hosts
-#done
+network=192.168.230 #This is Vmware workstation or Virtualbox host-network
+echo $network.10 kube-master > /etc/hosts
+for i in {1..9}
+do 
+  echo $network.1$i kube-worker-$i >> /etc/hosts
+done
 
 #Install Docker-CE
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
