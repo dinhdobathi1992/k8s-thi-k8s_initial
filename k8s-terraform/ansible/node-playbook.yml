@@ -1,7 +1,0 @@
----
-- hosts: all
-  become: true
-  tasks:
-    - name: install worker-node
-      import_role:
-        name: worker-role
