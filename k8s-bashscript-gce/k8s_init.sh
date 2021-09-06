@@ -1,6 +1,8 @@
 #!/bin/bash -x
-#Varible System
+#Varible System. Edit here to correct with your instance
 docker_daemon=/etc/docker/daemon.json
+master_ip=10.148.0.2 #Private IP address of K8S Master instance
+master_hostname=kube-master #Hostname of K8S Master instance
 
 #This is host network of vmware workstation on my machine. Please check to your machine correct more.
 #network=192.168.230
@@ -17,8 +19,6 @@ sysctl --system
 swapoff -a
 
 #set hostname /etc/hosts. Only use to Cloud Instance like (AWS, GCE...)
-master_ip=10.148.0.2 #Private IP address of K8S Master instance
-master_hostname=kube-master
 echo $master_ip $master_hostname >> /etc/hosts
 
 #Install Docker-CE
