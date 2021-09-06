@@ -1,5 +1,5 @@
 ### A GCP service account key:
-- Create a service account key to enable Terraform to access your GCP account. When creating the key, use the following settings:
+Create a service account key to enable Terraform to access your GCP account. When creating the key, use the following settings:
     + Select the project you created in the previous step.
     + Click "Create Service Account".
     + Give it any name you like and click "Create".
