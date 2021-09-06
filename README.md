@@ -23,15 +23,15 @@ Copy file service account to working folder
 - region
 # check and update path variable gce_ssh_pub_key_file and gce_ssh_pvt_key_file
 # Rewrite terraform configuration files to a cnonical format and style
-terraform fmt
+- terraform fmt
 # validates the configuration files in a directory
-terraform validate
+- terraform validate
 # create an execution plan
-terraform plan
+- terraform plan
 # executes the actions proposed in a terraform plan
-terraform apply
+- terraform apply
 # update external ip in ansibler variable ~/ansible/inventory/hosts and ip external master, user ssh at ~/ansible/inventory/group_vars/all
-cd /ansible
-ansible-playbook -i inventory/hosts master-playbook.yml -v
-ansible-playbook -i inventory/hosts node-playbook.yml -v
+- cd /ansible
+- ansible-playbook -i inventory/hosts master-playbook.yml -v
+- ansible-playbook -i inventory/hosts node-playbook.yml -v
 # ansible will auto fetch file kube config in /ansible/config change server: https://external_IP:6443
