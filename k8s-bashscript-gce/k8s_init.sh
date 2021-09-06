@@ -16,14 +16,10 @@ sysctl --system
 #Turn off SWAP to increse performance
 swapoff -a
 
-#set hostname /etc/hosts. Only use to vmware workstation or virtualbox
-#length=9 mean number of workers
-#echo $network.10 kube-master > /etc/hosts
-#for i in {1..9}
-#do 
-#  echo $network.1$i kube-worker-$i >> /etc/hosts
-#done
-echo 10.148.0.2 kube-master >> /etc/hosts
+#set hostname /etc/hosts. Only use to Cloud Instance like (AWS, GCE...)
+master_ip=10.148.0.2 #Private IP address of K8S Master instance
+master_hostname=kube-master
+echo $master_ip $master_hostname >> /etc/hosts
 
 #Install Docker-CE
 yum install -y yum-utils epel-release
