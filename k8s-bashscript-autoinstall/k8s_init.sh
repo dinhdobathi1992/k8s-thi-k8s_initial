@@ -56,14 +56,14 @@ yum makecache
 #Installing K8S Cluster
 if [ "$HOSTNAME" = kube-master ]; then
       if [ ! -d /vagrant ]; then
-      mkdir /vagrant
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_master.sh?inline=false -O /vagrant/k8s_master.sh
+      sh k8s_master.sh
       if
-  cd /vagrant
-  sh k8s_master.sh
 else
       if [ ! -d /vagrant ]; then
-      mkdir /vagrant
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
+      sh k8s_node.sh
       if
-  cd /vagrant
-  sh k8s_node.sh
 fi
