@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("linh-324413-371ec54a7bed.json")
+  credentials = file(var.service_account_key)
 
   project = var.gce_project_id
   region  = var.gce_region
