@@ -10,8 +10,8 @@ systemctl enable kubelet
 echo "Joining K8S Cluster"
 sshpass -p "vagrant" scp -o StrictHostKeyChecking=no vagrant@kube-master:/home/vagrant/kubeadm_join_cmd.sh .
 chmod +x kubeadm_join_cmd.sh
-if [[ $(sh ./kubeadm_join_cmd.sh | grep 'This node has joined the cluster') = "This node has joined the cluste" ]];
-then
+if [[ $(sh ./kubeadm_join_cmd.sh | grep 'This node has joined the cluster') = "This node has joined the cluste" ]]; then
+echo "This node has joined the cluste"
 shutdown -r now
 fi
 
