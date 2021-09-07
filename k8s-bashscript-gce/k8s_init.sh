@@ -68,11 +68,11 @@ if [ "$HOSTNAME" = kube-master ]; then
       mkdir /vagrant && cd /vagrant
       wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-gce/k8s_master.sh?inline=false -O /vagrant/k8s_master.sh
       sh k8s_master.sh
-      if
+      fi
 else
       if [ ! -d /vagrant ]; then
       mkdir /vagrant && cd /vagrant
       wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-gce/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
       sh k8s_node.sh
-      if
+      fi
 fi
