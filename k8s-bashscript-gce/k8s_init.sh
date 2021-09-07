@@ -63,7 +63,6 @@ EOF
 yum upgrade -y
 
 #Installing K8S Cluster
-#Installing K8S Cluster
 if [ "$HOSTNAME" = kube-master ]; then
       if [ ! -d /vagrant ]; then
       mkdir /vagrant && cd /vagrant
