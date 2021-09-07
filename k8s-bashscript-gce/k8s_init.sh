@@ -1,7 +1,11 @@
 #!/bin/bash -x
-#Varible System
+#Varible System. Edit here to correct with your instance
 docker_daemon=/etc/docker/daemon.json
-network=192.168.230 #This is host network of vmware workstation (or virtualbox). Please change it to match your virtualization environment
+master_ip=10.148.0.2 #Private IP address of K8S Master instance
+master_hostname=kube-master #Hostname of K8S Master instance
+
+#This is host network of vmware workstation on my machine. Please check to your machine correct more.
+#network=192.168.230
 
 #Iptables Setting
 modprobe br_netfilter
@@ -14,15 +18,11 @@ sysctl --system
 #Turn off SWAP to increse performance
 swapoff -a
 
-#set hostname /etc/hosts
-#length=9 mean number of node workers
-echo $network.10 kube-master > /etc/hosts
-for i in {1..9}
-do 
-  echo $network.1$i kube-worker-$i >> /etc/hosts
-done
+#set hostname /etc/hosts. Only use to Cloud Instance like (AWS, GCE...)
+echo $master_ip $master_hostname >> /etc/hosts
 
 #Install Docker-CE
+yum install -y yum-utils epel-release
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 yum install -y docker-ce
@@ -51,19 +51,13 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl
 EOF
-yum makecache
+yum upgrade -y
 
 #Installing K8S Cluster
 if [ "$HOSTNAME" = kube-master ]; then
-      if [ ! -d /vagrant ]; then
-      mkdir /vagrant && cd /vagrant
-      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_master.sh?inline=false -O /vagrant/k8s_master.sh
-      sh k8s_master.sh
-      if
+  chmod 755 /vagrant/k8s_master.sh
+  sh /vagrant/k8s_master.sh
 else
-      if [ ! -d /vagrant ]; then
-      mkdir /vagrant && cd /vagrant
-      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-autoinstall/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
-      sh k8s_node.sh
-      if
+  chmod 755 /vagrant/k8s_node.sh
+  sh /vagrant/k8s_node.sh
 fi
