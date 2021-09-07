@@ -63,10 +63,17 @@ EOF
 yum upgrade -y
 
 #Installing K8S Cluster
+#Installing K8S Cluster
 if [ "$HOSTNAME" = kube-master ]; then
-  chmod 755 /vagrant/k8s_master.sh
-  sh /vagrant/k8s_master.sh
+      if [ ! -d /vagrant ]; then
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-gce/k8s_master.sh?inline=false -O /vagrant/k8s_master.sh
+      sh k8s_master.sh
+      if
 else
-  chmod 755 /vagrant/k8s_node.sh
-  sh /vagrant/k8s_node.sh
+      if [ ! -d /vagrant ]; then
+      mkdir /vagrant && cd /vagrant
+      wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-gce/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
+      sh k8s_node.sh
+      if
 fi
