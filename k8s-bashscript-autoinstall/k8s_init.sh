@@ -2,6 +2,14 @@
 #Varible System
 docker_daemon=/etc/docker/daemon.json
 network=192.168.230 #This is host network of vmware workstation (or virtualbox). Please change it to match your virtualization environment
+# OS Setting
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+systemctl stop firewalld
+systemctl disable firewalld
+yum -y install net-tools wget bind-utils epel-release
+sed -i 's/enforcing/disabled/g' /etc/selinux/config
+setenforce 0
 
 #Iptables Setting
 modprobe br_netfilter
