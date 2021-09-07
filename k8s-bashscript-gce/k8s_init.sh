@@ -1,11 +1,20 @@
 #!/bin/bash -x
 #Varible System. Edit here to correct with your instance
 docker_daemon=/etc/docker/daemon.json
-master_ip=10.148.0.2 #Private IP address of K8S Master instance
-master_hostname=kube-master #Hostname of K8S Master instance
+master_ip=10.148.0.2 #Private IP address of K8S Master instance. Chang it to match your environment
+master_hostname=kube-master #Hostname of K8S Master instance.Chang it to match your environment
 
 #This is host network of vmware workstation on my machine. Please check to your machine correct more.
 #network=192.168.230
+
+#OS Setting
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+systemctl stop firewalld
+systemctl disable firewalld
+yum -y install net-tools wget bind-utils epel-release
+sed -i 's/enforcing/disabled/g' /etc/selinux/config
+setenforce 0
 
 #Iptables Setting
 modprobe br_netfilter
