@@ -72,6 +72,7 @@ if [ "$HOSTNAME" = kube-master ]; then
 else
       if [ ! -d /vagrant ]; then
       mkdir /vagrant && cd /vagrant
+      sleep 300 # waiting installation complete of Master
       wget https://gitlab.com/devops1164/deploy-k8s/-/raw/main/k8s-bashscript-gce/k8s_node.sh?inline=false -O /vagrant/k8s_node.sh
       sh k8s_node.sh
       fi
