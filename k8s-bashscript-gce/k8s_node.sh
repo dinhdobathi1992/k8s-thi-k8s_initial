@@ -7,6 +7,7 @@ systemctl start kubelet
 systemctl enable kubelet
 
 #Waiting installation complete of Master
+echo "Waiting to K8S completed on Master"
 sleep 300
 
 #Join K8S Cluster
