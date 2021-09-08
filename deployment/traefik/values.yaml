@@ -327,7 +327,7 @@ tlsOptions: {}
 # from.
 service:
   enabled: true
-  type: LoadBalancer
+  type: ClusterIP
   # Additional annotations (e.g. for cloud provider specific config)
   annotations: {}
   # Additional service labels (e.g. for filtering Service by custom labels)
