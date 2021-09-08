@@ -6,6 +6,9 @@ yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl start kubelet
 systemctl enable kubelet
 
+#Waiting installation complete of Master
+sleep 300
+
 #Join K8S Cluster
 echo "Joining K8S Cluster"
 sshpass -p "vagrant" scp -o StrictHostKeyChecking=no vagrant@kube-master:/home/vagrant/kubeadm_join_cmd.sh .
