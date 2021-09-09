@@ -486,14 +486,14 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: ""
+  storageClass: "local-storage"
   ## @param persistence.accessModes PVC Access Mode for PostgreSQL volume
   ##
   accessModes:
     - ReadWriteOnce
   ## @param persistence.size PVC Storage Request for PostgreSQL volume
   ##
-  size: 8Gi
+  size: 20Gi
   ## @param persistence.annotations Annotations for the PVC
   ##
   annotations: {}
