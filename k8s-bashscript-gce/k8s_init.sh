@@ -2,7 +2,7 @@
 #Varible System. Edit here to correct with your instance
 docker_daemon=/etc/docker/daemon.json
 echo "Enter Ip Address of your Master:"
-read master_i
+read master_ip
 #master_ip=10.148.0.2 #Private IP address of K8S Master instance. Chang it to match your environment
 echo "Enter Hostname of your Master:"
 read master_hostname
