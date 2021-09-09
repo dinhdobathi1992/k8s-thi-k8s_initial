@@ -465,7 +465,7 @@ shmVolume:
 persistence:
   ## @param persistence.enabled Enable persistence using PVC
   ##
-  enabled: false
+  enabled: true
   ## @param persistence.existingClaim Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template.
   ## If defined, PVC must be created manually before volume will be bound
   ## The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
