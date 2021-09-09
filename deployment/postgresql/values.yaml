@@ -470,7 +470,7 @@ persistence:
   ## If defined, PVC must be created manually before volume will be bound
   ## The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
   ##
-  ## existingClaim: ""
+  #existingClaim: ""
   ## @param persistence.mountPath The path the volume will be mounted at, useful when using different
   ## PostgreSQL images.
   ##
@@ -486,14 +486,14 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: "local-storage"
+  # storageClass: "local-path"
   ## @param persistence.accessModes PVC Access Mode for PostgreSQL volume
   ##
   accessModes:
     - ReadWriteOnce
   ## @param persistence.size PVC Storage Request for PostgreSQL volume
   ##
-  size: 5Gi
+  size: 10Gi
   ## @param persistence.annotations Annotations for the PVC
   ##
   annotations: {}
