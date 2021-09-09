@@ -1,12 +1,12 @@
 #!/bin/bash -x
+# Change root privileges
+#sudo -i
 #Varible System. Edit here to correct with your instance
 docker_daemon=/etc/docker/daemon.json
-echo "Enter Ip Address of your Master:"
-read master_ip
 #master_ip=10.148.0.2 #Private IP address of K8S Master instance. Chang it to match your environment
-echo "Enter Hostname of your Master:"
-read master_hostname
-#master_hostname=kube-master #Hostname of K8S Master instance.Chang it to match your environment
+read -p "Enter Ip Address of your Master: " master_ip
+#master_hostname=kube-master #Hostname of K8S Master instance.Chang it to match your environmen
+read -p "Enter Hostname of your Master: " master_hostname
 
 #This is host network of vmware workstation on my machine. Please check to your machine correct more.
 #network=192.168.230
@@ -35,7 +35,7 @@ swapoff -a
 echo $master_ip $master_hostname >> /etc/hosts
 
 #Install Docker-CE
-yum install -y yum-utils epel-release
+yum install -y yum-utils epel-release wget
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 yum install -y docker-ce
