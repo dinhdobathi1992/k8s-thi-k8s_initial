@@ -11,7 +11,7 @@ image:
 deployment:
   enabled: true
   # Can be either Deployment or DaemonSet
-  kind: Deployment
+  kind: DaemonSet
   # Number of pods of the deployment (only applies when kind == Deployment)
   replicas: 1
   # Additional deployment annotations (e.g. for jaeger-operator sidecar injection)
@@ -327,7 +327,7 @@ tlsOptions: {}
 # from.
 service:
   enabled: true
-  type: ClusterIP
+  type: LoadBalancer
   # Additional annotations (e.g. for cloud provider specific config)
   annotations: {}
   # Additional service labels (e.g. for filtering Service by custom labels)
