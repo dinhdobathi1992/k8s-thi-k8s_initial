@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webeco
+  namespace: medofa
+spec:
+  selector:
+    matchLabels:
+      app: webeco
+  template:
+    metadata:
+      labels:
+        app: webeco
+    spec:
+      containers:
+      - name: webeco
+        image: registry.gitlab.com/devops1164/website:develop
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
