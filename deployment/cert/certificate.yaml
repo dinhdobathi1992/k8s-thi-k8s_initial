@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-cert
+  namespace: traefik
+spec:
+  dnsNames:
+    - traefik.ddns.net
+    - argocd02.ddns.net
+  secretName: tls-cert
+  issuerRef:
+    name: letsencrypt-linhnh
+    kind: ClusterIssuer
