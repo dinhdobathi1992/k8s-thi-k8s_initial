@@ -17,7 +17,7 @@ spec:
       middlewares:
         - name: traefik-secured
   tls:
-    secretName: tls-cert
+    secretName: tls-cert.linhnh.svc.cluster.local
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

@@ -3326,6 +3326,8 @@ spec:
         - argocd-server
         - --staticassets
         - /shared/app
+        - --repo-server
+        - argocd-repo-server:8081
         - --insecure
         env:
         - name: ARGOCD_SERVER_INSECURE
