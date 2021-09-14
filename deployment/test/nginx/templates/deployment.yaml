@@ -52,6 +52,11 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          volumeMounts:
+            - name: {{ .Values.persistentVolumeClaim.name }}
+              mountPath: /{{ .Values.persistentVolumeClaim.name }}
+            - name: config
+              mountPath: /etc/nginx/conf.d
           livenessProbe:
             httpGet:
               path: /
