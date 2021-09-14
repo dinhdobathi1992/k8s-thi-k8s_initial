@@ -1,0 +1,6 @@
+name: gcp-python
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Infras As Code on GCE
