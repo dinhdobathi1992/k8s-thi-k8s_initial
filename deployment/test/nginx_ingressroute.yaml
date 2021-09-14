@@ -1,0 +1,28 @@
+--- 
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nginx-ingressroute
+  namespace: linhnh
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`nginxweb.ddns.net`)
+      kind: Rule
+      services:
+        - name: nginx
+          port: 80
+      middlewares:
+        - name: nginxweb-https-only
+  tls:
+    secretName: tls-cert.traefik.svc.cluster.local
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nginxweb-https-only
+  namespace: linhnh
+spec:
+  redirectScheme:
+    scheme: https

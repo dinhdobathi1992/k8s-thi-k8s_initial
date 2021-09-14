@@ -5,8 +5,9 @@ metadata:
   name: tls-cert
 spec:
   dnsNames: 
-    - traefik.ddns.net
-    - argocd02.ddns.net
+    - traefik03.ddns.net
+    - argocd03.ddns.net
+    - nginxweb.ddns.net
   secretName: tls-cert
   issuerRef:
     name: letsencrypt-linhnh

@@ -1,0 +1,9 @@
+{{- if .Values.middlewares.enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nginxweb-https-only
+spec:
+  redirectScheme:
+    scheme: https
+{{- end -}}

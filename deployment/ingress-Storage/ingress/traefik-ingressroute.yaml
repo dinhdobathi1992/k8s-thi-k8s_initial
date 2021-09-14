@@ -9,7 +9,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`traefik.ddns.net`) # Hostname to match
+    - match: Host(`traefik03.ddns.net`) # Hostname to match
       kind: Rule
       services: # Service to redirect requests to
         - name: api@internal # Special service created by Traefik pod
@@ -17,7 +17,7 @@ spec:
       middlewares:
         - name: traefik-secured
   tls:
-    secretName: tls-cert.linhnh.svc.cluster.local
+    secretName: tls-cert
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
