@@ -1,4 +1,6 @@
 #/bin/bash -x
+get_private_ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/')
+echo $private_ip $HOSTNAME >> /etc/hosts
 #Intalling k8s
 echo "Intalling k8s"
 yum install -y sshpass
