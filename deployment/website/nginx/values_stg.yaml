@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -36,12 +36,14 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 volumes:
-  name: code
-persistentVolumeClaim: 
-  enabled: true
-  name: code
-configMap:
   enable: true
+  name: code
+initContainers: 
+  name: web-content
+  image: busybox
+  content: <h1>I am <font color=blue>STG</font></h1>
+configMap:
+  enable: false
   key: config 
   path: site.conf
   fastcgi_pass: php:9000 # service php 

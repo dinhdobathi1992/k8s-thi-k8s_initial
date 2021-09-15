@@ -58,7 +58,7 @@ ingress:
   # rule math hosts with path: Host(`example.org`) && Path(`/traefik`)
   match: Host(`nginxweb.ddns.net`)
   tls: 
-    secretName: kustomize-tls-cert.traefik.svc.cluster.local
+    secretName: tls-cert.traefik.svc.cluster.local
   #    hosts:
   #      - chart-example.local
 middlewares:

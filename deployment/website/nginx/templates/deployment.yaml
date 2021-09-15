@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,31 +15,20 @@ spec:
       tier: {{ .Values.labels }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         app: {{ .Values.name }}
         tier: {{ .Values.labels }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "nginx.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
-        - name: {{ .Values.persistentVolumeClaim.name }}
-          persistentVolumeClaim:
-            claimName: {{ .Values.persistentVolumeClaim.name }}
-        - name: config
-          configMap:
-            name: {{ .Values.name }}-configmap
-            items:
-            - key: {{ .Values.configMap.key }}
-              path: {{ .Values.configMap.path }}
+      - name: {{ .Values.volumes.name }}
+        emptyDir: {}
+      initContainers:
+      - name: {{ .Values.initContainers.name }}
+        image: {{ .Values.initContainers.image }}
+        volumeMounts:
+        - name: {{ .Values.volumes.name }}
+          mountPath: "/{{ .Values.volumes.name }}"
+        command: ["/bin/sh", "-c", 'echo {{ .Values.initContainers.image | quote }} > /{{ .Values.volumes.name }}/index.html']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -50,10 +40,8 @@ spec:
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: {{ .Values.persistentVolumeClaim.name }}
-              mountPath: /{{ .Values.persistentVolumeClaim.name }}
-            - name: config
-              mountPath: /etc/nginx/conf.d
+            - name: {{ .Values.volumes.name }}
+              mountPath: "/usr/share/nginx/html"
           livenessProbe:
             httpGet:
               path: /
