@@ -1,0 +1,1 @@
+helm upgrade --install --namespace gitlab-runner gitlab-runner -f ./values.yaml

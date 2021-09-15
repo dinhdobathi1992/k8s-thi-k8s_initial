@@ -1,0 +1,38 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-ingressroute
+  namespace: argocd
+  # labels:
+  #   name: argocd-ingressroute
+spec:
+  entryPoints:
+    # - web
+    - websecure
+  routes:
+    - match: Host(`argocd02.ddns.net`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 80
+    - match: Host(`argocd02.ddns.net`) && Headers(`Content-Type`, `application/grpc`)
+      kind: Rule
+      priority: 11
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: h2c
+      middlewares:
+        - name: argocd-https-only
+  tls:
+    secretName: tls-cert.linhnh.svc.cluster.local
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: argocd-https-only
+  namespace: argocd
+spec:
+  redirectScheme:
+    scheme: https

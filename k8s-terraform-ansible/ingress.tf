@@ -2,7 +2,7 @@
 #            create network          #
 ######################################
 resource "google_compute_network" "vpc_network" {
-  name = var.gce_network
+  name = "terraform-network"
 }
 
 ######################################
@@ -37,7 +37,16 @@ resource "google_compute_firewall" "ingress_allow" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "6443"]
+    ports    = ["22"]
+  }
+  
+  allow {
+    protocol = "tcp"
+    ports    = ["0-65535"]
+  }
+  allow {
+    protocol = "udp"
+    ports    = ["53", "1053"]
   }
 
   source_ranges = ["0.0.0.0/0"]

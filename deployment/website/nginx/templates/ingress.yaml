@@ -1,0 +1,29 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+{{- end }}
+kind: IngressRoute
+metadata:
+  name: {{ .Values.name }}-ingressroute
+spec:
+  entryPoints:
+    {{- range .Values.ingress.entryPoints }}
+    - {{ . | quote }}
+    {{- end }}
+  routes:
+    - match: {{ .Values.ingress.match }}
+      kind: Rule
+      services:
+        - name: {{ .Values.name }}
+          port: {{ .Values.service.port }}
+      middlewares:
+        - name: {{ .Values.middlewares.name }}
+  tls:
+    secretName: {{ .Values.ingress.tls.secretName }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Values.middlewares.name }}
+spec:
+  redirectScheme:
+    scheme: https
